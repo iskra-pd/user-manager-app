@@ -1,0 +1,52 @@
+<div class="modal-header">
+	<h2 class="modal-title">Add/Edit User</h2>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+  <form name="form" novalidate #f="ngForm" (ngSubmit)=" f.form.valid && onSubmit()">
+    <div class="form-group">
+      <label for="name">First Name</label>
+      <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required [(ngModel)]="user.firstName" #firstName="ngModel" name="firstName">
+	  <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+		<div *ngIf="firstName.errors.required">First Name is required.
+		</div>
+      </div>
+	</div>
+
+    <div class="form-group">
+      <label for="name">Last Name</label>
+      <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" #lastName="ngModel" id="lastName" required [(ngModel)]="user.lastName" name="lastName">	  
+	  <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+		<div *ngIf="lastName.errors.required">Last Name is required.
+		</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Email</label>
+      <input type="text" class="form-control" id="email"  #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email [(ngModel)]="user.email" name="email">
+	  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+	  </div>
+    </div>
+
+	<div class="form-group">
+		<label for="name">DOB</label>
+		<div class="input-group">
+			<input placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" #dob="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dob.invalid }" class="form-control" id="dob" required [(ngModel)]="selDate" name="dob">
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+			</div>
+		</div>
+    </div>
+	<button type="submit" class="btn btn-outline-dark btn-primary">Save</button>
+  </form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger" (click)="activeModal.dismiss('cancel click')">Cancel</button>
+  </div>
+
+
