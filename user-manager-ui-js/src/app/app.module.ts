@@ -7,8 +7,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalDelete } from './users-list/users-list.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalDelete, NgbdSortableHeader } from './users-list/users-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     CreateUserComponent,
 	NgbdModalDelete,
+	NgbdSortableHeader,
     UserDetailsComponent,
     UsersListComponent
   ],

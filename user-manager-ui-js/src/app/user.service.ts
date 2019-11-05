@@ -27,7 +27,7 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
-  getUsersList(): Observable<any> {
+  getUsersList(): Observable <any> {
     return this.http.get(`${this.baseUrl}`);
   }
 }
