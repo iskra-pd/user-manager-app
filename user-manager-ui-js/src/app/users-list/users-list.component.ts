@@ -9,6 +9,8 @@ import { CreateUserComponent } from '../create-user/create-user.component'
 
 import {NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
+
+/* Delete pop-up */
 @Component({
   selector: 'ngbd-modal-delete',
   template: `
@@ -34,6 +36,7 @@ export class NgbdModalDelete{
    public userId = 0;
 }
 
+/* Sorting */
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
@@ -63,7 +66,7 @@ export class NgbdSortableHeader {
   }
 }
 
-
+/* Users List */
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -72,7 +75,7 @@ export class NgbdSortableHeader {
 
 export class UsersListComponent implements OnInit {
 
-   public users: Observable <User[]>;
+   public users:  User[];
    closeResult: string;
    modalOptions: NgbModalOptions;
    
@@ -98,23 +101,27 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-	   this.reloadData();
-	   
-  this.activatedRoute.queryParamMap.subscribe((paramMap: ParamMap) => {
+	   this.reloadData(); 
+   this.activatedRoute.queryParamMap.subscribe((paramMap: ParamMap) => {
     const refresh = paramMap.get('refresh');
     if (refresh) {
       this.reloadData();
     }
-  });
+  }); 
 
   }
 
   reloadData() {
-    this.users = this.userService.getUsersList();
+    this.userService.getUsersList().subscribe(data => { this.users = data;});
   }
   
   createUser(){
-	  this.modalService.open(CreateUserComponent)
+	  this.modalService.open(CreateUserComponent);
+  }
+  
+  editUser(id:number){
+	const editModalRef = this.modalService.open(CreateUserComponent);
+	  editModalRef.componentInstance.userId= id;
   }
 
   deleteDialog(id:number){
@@ -148,15 +155,15 @@ export class UsersListComponent implements OnInit {
       }
     });
 
-    // sorting countries
+    // sorting users
     if (direction === '') {
 
     } else {
-     this.users= this.userService.getUsersList().pipe(map(data => {return data.sort((a, b) => {
+     this.users= this.users.sort((a, b) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
 	  })
-      }));
+      ;
     }
   }
 }

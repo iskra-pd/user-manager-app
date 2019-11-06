@@ -33,7 +33,7 @@ public class UserCtrlr {
         return userRepository.findAll();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
         throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
@@ -55,6 +55,7 @@ public class UserCtrlr {
         user.setEmail(userDetails.getEmail());
         user.setLastName(userDetails.getLastName());
         user.setFirstName(userDetails.getFirstName());
+        user.setDOB(userDetails.getDOB());
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }

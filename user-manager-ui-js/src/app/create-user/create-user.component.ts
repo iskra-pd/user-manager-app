@@ -1,9 +1,9 @@
 import { UserService } from '../user.service';
 import { User } from '../user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -14,12 +14,32 @@ export class CreateUserComponent implements OnInit {
 
   user: User = new User();
   submitted = false;
-  selDate= null;
-
+  selDate = null;
+  userId = null;
+  
+  @ViewChild('f',null) userForm: NgForm;
+  
   constructor(private userService: UserService,
     private router: Router,public activeModal: NgbActiveModal) { }
 
-  ngOnInit(){}
+  ngOnInit(){
+	 if(this.userId){
+		this.userService.getUser(this.userId)
+      .subscribe(data => {
+        console.log(data);
+        this.user = data;
+		
+		//Set datepicker value
+		let dob = new Date(this.user.dob);
+		this.selDate = {
+			year: dob.getFullYear(),
+			month: dob.getMonth() +1,
+			day: dob.getDate()
+		};
+	  
+      }, error => console.log(error)); 
+	 }     
+  }
 
 
 
@@ -32,9 +52,24 @@ export class CreateUserComponent implements OnInit {
 	//format date from date picker
 	let selDateFormat= this.selDate.year + "-"+ this.selDate.month + "-"+ this.selDate.day;
 	this.user.dob = new Date(selDateFormat);
-	// send user to db 
+	
+	if(this.userId){
+		//update existing user
+	this.userService.updateUser(this.userId, this.user)
+      .subscribe(data => {
+		  console.log('Updated User: '+ JSON.stringify(data));
+		   this.gotoList();
+	  
+	  }, error => console.log(error));
+	} else {
+		// save new user to db 
     this.userService.createUser(this.user)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => {
+		  console.log('New User:' + JSON.stringify(data));
+		  this.gotoList();
+		  }, error => console.log(error));
+	}
+	
     this.user = new User();
 	this.activeModal.close();
     

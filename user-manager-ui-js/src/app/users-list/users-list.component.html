@@ -18,14 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | async">
+        <tr *ngFor="let user of users ">
 		  <td>{{user.id}}</td>
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
 		  <td>{{user.email}}</td>
 		  <td>{{user.dob}}</td>
           <td>
-              <button (click)="userDetails(user.id)" class="btn btn-info" >Edit</button>
+              <button (click)="editUser(user.id)" class="btn btn-info" >Edit</button>
 			  <button (click)="deleteDialog(user.id)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
           </td>
         </tr>
