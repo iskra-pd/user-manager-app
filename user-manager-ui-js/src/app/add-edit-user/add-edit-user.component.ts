@@ -6,11 +6,11 @@ import {NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  selector: 'app-add-edit-user',
+  templateUrl: './add-edit-user.component.html',
+  styleUrls: ['./add-edit-user.component.css']
 })
-export class CreateUserComponent implements OnInit {
+export class AddEditUserComponent implements OnInit {
 
   user: User = new User();
   submitted = false;
@@ -32,11 +32,11 @@ export class CreateUserComponent implements OnInit {
 		//Set datepicker value
 		let dob = new Date(this.user.dob);
 		this.selDate = {
-			year: dob.getFullYear(),
-			month: dob.getMonth() +1,
-			day: dob.getDate()
+			year: dob.getUTCFullYear(),
+			month: dob.getUTCMonth() +1,
+			day: dob.getUTCDate()
 		};
-	  
+	  console.log('Date edit:' + this.user.dob);
       }, error => console.log(error)); 
 	 }     
   }
@@ -50,8 +50,8 @@ export class CreateUserComponent implements OnInit {
 
   save() {
 	//format date from date picker
-	let selDateFormat= this.selDate.year + "-"+ this.selDate.month + "-"+ this.selDate.day;
-	this.user.dob = new Date(selDateFormat);
+	this.user.dob = this.selDate.year + "/"+ this.selDate.month + "/"+ this.selDate.day;
+	console.log('Date of birth:' + this.user.dob);
 	
 	if(this.userId){
 		//update existing user

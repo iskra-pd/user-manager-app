@@ -36,7 +36,7 @@
 	<div class="form-group">
 		<label for="name">DOB</label>
 		<div class="input-group">
-			<input placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" #dob="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dob.invalid }" class="form-control" id="dob" required [(ngModel)]="selDate" name="dob">
+			<input placeholder="yyyy-MM-dd" ngbDatepicker #d="ngbDatepicker" #dob="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dob.invalid }" class="form-control" id="dob" required [(ngModel)]="selDate" name="dob">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
 			</div>

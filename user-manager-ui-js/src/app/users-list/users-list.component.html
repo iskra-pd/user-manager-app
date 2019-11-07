@@ -9,7 +9,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
-		  <th>Id</th>
+		  <th sortable="firstName" (sort)="onSort($event)">Id</th>
           <th sortable="firstName" (sort)="onSort($event)">First Name</th>
           <th sortable="lastName" (sort)="onSort($event)">Last Name</th>
 		  <th sortable="email" (sort)="onSort($event)">Email</th>

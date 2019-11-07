@@ -17,13 +17,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private Date dob;
+    private String dob;
  
     public User() {
   
     }
  
-    public User(String firstName, String lastName, String email,Date dob) {
+    public User(String firstName, String lastName, String email,String dob) {
          this.firstName = firstName;
          this.lastName = lastName;
          this.email= email;
@@ -64,17 +64,17 @@ public class User {
     }
     
     @Column(name = "dob", nullable = false)
-    public Date getDOB() {
+    public String getDOB() {
         return dob;
     }
-    public void setDOB(Date dob) {
+    public void setDOB(String dob) {
         this.dob = dob;
     }
 
     @Override
     public String toString() {
         return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-        		+ ", dob=" + dob.toString() + "]";
+        		+ ", dob=" + dob + "]";
     }
  
 }

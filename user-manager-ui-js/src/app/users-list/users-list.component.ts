@@ -1,11 +1,10 @@
-import { UserDetailsComponent } from '../user-details/user-details.component';
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { UserService } from "../user.service";
 import { User } from "../user";
 import { Component, Directive, OnInit, EventEmitter, Input, Output, QueryList, ViewChildren} from "@angular/core";
 import { ActivatedRoute, Router,ParamMap } from '@angular/router';
-import { CreateUserComponent } from '../create-user/create-user.component'
+import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component'
 
 import {NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
@@ -116,11 +115,11 @@ export class UsersListComponent implements OnInit {
   }
   
   createUser(){
-	  this.modalService.open(CreateUserComponent);
+	  this.modalService.open(AddEditUserComponent);
   }
   
   editUser(id:number){
-	const editModalRef = this.modalService.open(CreateUserComponent);
+	const editModalRef = this.modalService.open(AddEditUserComponent);
 	  editModalRef.componentInstance.userId= id;
   }
 
