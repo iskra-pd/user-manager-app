@@ -65,7 +65,7 @@ export class NgbdSortableHeader {
   }
 }
 
-/* Users List */
+/* Users List Grid */
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',

@@ -22,7 +22,7 @@ import com.usermanager.springboot.usermanagercrudapi.exception.ResourceNotFoundE
 import com.usermanager.springboot.usermanagercrudapi.model.User;
 import com.usermanager.springboot.usermanagercrudapi.repository.UserRepository;
 
-@RestController @CrossOrigin(origins = "http://localhost:4201")
+@RestController @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class UserCtrlr {
     @Autowired
