@@ -1,9 +1,9 @@
-import { UserService } from '../user.service';
-import { User } from '../user';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import {NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -13,7 +13,6 @@ import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 export class AddEditUserComponent implements OnInit {
 
   user: User = new User();
-  submitted = false;
   selDate = null;
   userId = null;
   
@@ -36,28 +35,19 @@ export class AddEditUserComponent implements OnInit {
 			month: dob.getUTCMonth() +1,
 			day: dob.getUTCDate()
 		};
-	  console.log('Date edit:' + this.user.dob);
       }, error => console.log(error)); 
 	 }     
   }
 
 
-
-  newUser(): void {
-    this.submitted = false;
-    this.user = new User();
-  }
-
   save() {
 	//format date from date picker
 	this.user.dob = this.selDate.year + "/"+ this.selDate.month + "/"+ this.selDate.day;
-	console.log('Date of birth:' + this.user.dob);
 	
 	if(this.userId){
 		//update existing user
 	this.userService.updateUser(this.userId, this.user)
       .subscribe(data => {
-		  console.log('Updated User: '+ JSON.stringify(data));
 		   this.gotoList();
 	  
 	  }, error => console.log(error));
@@ -65,7 +55,6 @@ export class AddEditUserComponent implements OnInit {
 		// save new user to db 
     this.userService.createUser(this.user)
       .subscribe(data => {
-		  console.log('New User:' + JSON.stringify(data));
 		  this.gotoList();
 		  }, error => console.log(error));
 	}
@@ -76,7 +65,6 @@ export class AddEditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     this.save();    
   }
 

@@ -1,9 +1,7 @@
-import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { Component, Directive, OnInit, EventEmitter, Input, Output, QueryList, ViewChildren} from "@angular/core";
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { UserService } from "../user.service";
 import { User } from "../user";
-import { Component, Directive, OnInit, EventEmitter, Input, Output, QueryList, ViewChildren} from "@angular/core";
-import { ActivatedRoute, Router,ParamMap } from '@angular/router';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component'
 
 import {NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
